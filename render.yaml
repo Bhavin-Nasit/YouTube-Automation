@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: youtube-metadata-automation
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: AUTO_SUBSCRIBE_ON_STARTUP
+        value: true
+      - key: ENABLE_TRENDING_ENRICHMENT
+        value: true
+      - key: TRENDING_REGION_CODE
+        value: US
+      - key: TRENDING_LIMIT
+        value: 15
+      - key: TRENDING_TAG_LIMIT
+        value: 12
+      - key: TRENDING_TITLE_KEYWORD_LIMIT
+        value: 8
+      - key: MAX_TAGS
+        value: 45
+      - key: DRY_RUN
+        value: false
+      - key: BASE_URL
+        sync: false
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: YOUTUBE_CHANNEL_ID
+        sync: false
+      - key: YOUTUBE_UPLOADS_PLAYLIST_ID
+        sync: false
+      - key: YOUTUBE_CLIENT_ID
+        sync: false
+      - key: YOUTUBE_CLIENT_SECRET
+        sync: false
+      - key: YOUTUBE_REFRESH_TOKEN
+        sync: false
+      - key: DEFAULT_DESCRIPTION
+        sync: false
+      - key: DEFAULT_TAGS
+        sync: false
+      - key: DEFAULT_HASHTAGS
+        sync: false
+      - key: TRENDING_VIDEO_CATEGORY_ID
+        sync: false
+      - key: PROCESSED_STORE_PATH
+        value: data/processed_videos.json

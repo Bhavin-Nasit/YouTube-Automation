@@ -1,0 +1,1 @@
+"""YouTube metadata automation service."""
